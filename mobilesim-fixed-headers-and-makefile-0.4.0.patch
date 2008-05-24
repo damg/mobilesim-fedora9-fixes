@@ -1,0 +1,100 @@
+Only in MobileSim-src-0.4.0-fixed/config: .#MobileSim.spec
+Only in MobileSim-src-0.4.0-fixed/config: #MobileSim.spec#
+Only in MobileSim-src-0.4.0-fixed/config: MobileSim.spec
+diff -cr MobileSim-src-0.4.0/emulatePioneer/ArBasePacket.cpp MobileSim-src-0.4.0-fixed/emulatePioneer/ArBasePacket.cpp
+*** MobileSim-src-0.4.0/emulatePioneer/ArBasePacket.cpp	2007-05-25 22:57:09.000000000 +0200
+--- MobileSim-src-0.4.0-fixed/emulatePioneer/ArBasePacket.cpp	2008-05-24 15:43:20.000000000 +0200
+***************
+*** 25,30 ****
+--- 25,31 ----
+  #include "ariaOSDef.h"
+  #include "ArBasePacket.h"
+  #include <stdio.h>
++ #include <cstring>
+  
+  /**
+     @param bufferSize size of the buffer
+diff -cr MobileSim-src-0.4.0/emulatePioneer/ArSocket.h MobileSim-src-0.4.0-fixed/emulatePioneer/ArSocket.h
+*** MobileSim-src-0.4.0/emulatePioneer/ArSocket.h	2007-06-06 23:03:23.000000000 +0200
+--- MobileSim-src-0.4.0-fixed/emulatePioneer/ArSocket.h	2008-05-24 15:42:53.000000000 +0200
+***************
+*** 40,46 ****
+  #include <stdarg.h>
+  #endif
+  
+! 
+  #include <string>
+  #include "ariaTypedefs.h"
+  
+--- 40,46 ----
+  #include <stdarg.h>
+  #endif
+  
+! #include <cstring>
+  #include <string>
+  #include "ariaTypedefs.h"
+  
+Only in MobileSim-src-0.4.0-fixed/: log
+diff -cr MobileSim-src-0.4.0/Makefile MobileSim-src-0.4.0-fixed/Makefile
+*** MobileSim-src-0.4.0/Makefile	2007-06-07 16:59:33.000000000 +0200
+--- MobileSim-src-0.4.0-fixed/Makefile	2008-05-24 16:42:44.000000000 +0200
+***************
+*** 182,188 ****
+  	echo        make windist
+  	echo        make rpm
+  	echo        make deb
+! 	echo Set environment variable MOBILESIM_RELEASE to build a non-debug version (with optimization flags, with no debugger information, no compiler warnings, and with no logging to terminal on Windows)
+  	
+  
+  emulatePioneer/emulatePioneer.a emulatePioneer/emulatePioneerStageInterface.a: emulatePioneer/*.hh emulatePioneer/*.cc emulatePioneer emulatePioneer/Makefile
+--- 182,188 ----
+  	echo        make windist
+  	echo        make rpm
+  	echo        make deb
+! 	echo "Set environment variable MOBILESIM_RELEASE to build a non-debug version (with optimization flags, with no debugger information, no compiler warnings, and with no logging to terminal on Windows)"
+  	
+  
+  emulatePioneer/emulatePioneer.a emulatePioneer/emulatePioneerStageInterface.a: emulatePioneer/*.hh emulatePioneer/*.cc emulatePioneer emulatePioneer/Makefile
+***************
+*** 256,261 ****
+--- 256,262 ----
+      $(sysbindir)/MobileSim
+  
+  
++ 
+  rpm: install  config/MobileSim.spec
+  	rpm -bb config/MobileSim.spec && cp /usr/src/redhat/RPMS/i386/MobileSim-$(subst -,,$(MOBILESIM_VER))-*.i386.rpm . && echo "Copied RPM into current directory."
+  
+Only in MobileSim-src-0.4.0-fixed/: MobileSim
+Only in MobileSim-src-0.4.0/stage/src: config.h
+Only in MobileSim-src-0.4.0-fixed/stage/worlds/bitmaps: Makefile
+Only in MobileSim-src-0.4.0-fixed/stage/worlds: Makefile
+diff -cr MobileSim-src-0.4.0/tools/ArArgumentBuilder.cpp MobileSim-src-0.4.0-fixed/tools/ArArgumentBuilder.cpp
+*** MobileSim-src-0.4.0/tools/ArArgumentBuilder.cpp	2007-01-05 21:51:57.000000000 +0100
+--- MobileSim-src-0.4.0-fixed/tools/ArArgumentBuilder.cpp	2008-05-24 15:44:57.000000000 +0200
+***************
+*** 27,32 ****
+--- 27,34 ----
+  #include <stdarg.h>
+  #include <ctype.h>
+  #include <math.h>
++ #include <cstring>
++ #include <cstdlib>
+  
+  AREXPORT ArArgumentBuilder::ArArgumentBuilder(size_t argvLen)
+  {
+diff -cr MobileSim-src-0.4.0/tools/ariaUtil.h MobileSim-src-0.4.0-fixed/tools/ariaUtil.h
+*** MobileSim-src-0.4.0/tools/ariaUtil.h	2006-01-25 01:27:44.000000000 +0100
+--- MobileSim-src-0.4.0-fixed/tools/ariaUtil.h	2008-05-24 15:42:05.000000000 +0200
+***************
+*** 43,48 ****
+--- 43,51 ----
+  //#include "ArArgumentParser.h"
+  //#include "ariaInternal.h"
+  #include "ariaOSDef.h"
++ #include <cstdlib>
++ #include <cstring>
++ #include <climits>
+  
+  #ifndef M_PI
+  #define M_PI 3.1415927
